@@ -5,7 +5,6 @@ import dash_player
 
 dash.register_page(__name__, path='/', order=0)
 
-# resume sample template from https://zety.com/
 layout = html.Div([
     dcc.Markdown('# Yoeri Samwel', style={'textAlign':'center'}),
     dcc.Markdown('Michigan, USA', style={'textAlign': 'center'}),

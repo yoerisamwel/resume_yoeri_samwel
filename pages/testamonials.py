@@ -11,13 +11,17 @@ def layout():
 
     dbc.Row([
         dbc.Col([
-            dcc.Markdown('#### Xavier Hernández Creus'),
-            dcc.Markdown('FC Barcelona Head Coach')
+            dcc.Markdown('#### Joe Thompson'),
+            dcc.Markdown('Director of Supply Chain')
         ], width=2),
         dbc.Col([
-            dcc.Markdown('Yoeri is very professional. I really appreciate his quick thinking '
-                         'and great teamwork. I know a coach is not supposed to say this, but '
-                         'although O. Dembélé is a great player, Yoeri is my Forward Favorito.',
+            dcc.Markdown('Yoeri is the rare jack-of-all-trades that excels at everything he touches,'
+                         ' partially from natural talent and intelligence, partially from his steadfast '
+                         'determination to seeing projects through to their conclusion. He is an intuitive' 
+                         'problem-solver that will continuously innovate to reach sound, data-driven solutions,' 
+                         "and I've personally seen him touch all corners of our business leaving no stone unturned"
+                         ' to provide exceptional resolutions. I consider myself extremely fortunate to have '
+                         'had Yoeri on our team.',
                          className='ms-3'),
         ], width=5)
     ], justify='center'),
