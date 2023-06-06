@@ -7,6 +7,8 @@ import pandas as pd
 import plotly.express as px
 from datetime import datetime as dt
 
+dash.register_page(__name__, title='Inventory dashboard')
+
 #-----------------------------------------------------------------------------------------------------------------------
 #importing data/csv's
 df_stock = pd.read_csv('assets/stock_data_out.csv')
@@ -25,7 +27,6 @@ df_stock2.set_index('date_index', inplace=True)
 #df_stock2.to_csv('check.csv')
 #-----------------------------------------------------------------------------------------------------------------------
 
-dash.register_page(__name__)
 
 def layout():
     return html.Div([
@@ -61,7 +62,7 @@ def layout():
                             updatemode='singledate'
                         )
                     )
-                ], style={"height": 150})
+                ], style={"height": 185})
             ], md=3),
             dcc.Store(id='inventory_analysis_data', data=[], storage_type='memory'),
             dbc.Col([
@@ -75,13 +76,13 @@ def layout():
                             clearable=False
                         )
                     )
-                ], style={"height": 150})
+                ], style={"height": 185})
             ], md=3),
             dbc.Col([
                 dbc.Card([
                     dbc.CardHeader("Product Category:", style={'fontSize': 20, 'textAlign': 'center'}),
                     dbc.CardBody(dcc.Dropdown(id='product_category_dpdn', options=[], multi=True))
-                ], style={"height": 150})
+                ], style={"height": 185})
             ], md=4)
         ], className="mb-4"),
         dbc.Row([
