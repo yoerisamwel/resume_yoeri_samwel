@@ -6,8 +6,12 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import plotly.express as px
 from datetime import datetime as dt
+from dash_bootstrap_templates import load_figure_template
+
 
 dash.register_page(__name__, title='Inventory dashboard')
+
+load_figure_template(["SUPERHERO"])
 
 #-----------------------------------------------------------------------------------------------------------------------
 #importing data/csv's
@@ -88,9 +92,12 @@ def layout():
         dbc.Row([
             dbc.Col(
                 dcc.Graph(id='daterange_per_fc_sales_bar_graph', figure={})
-                , width=12)
-        ])
-])
+                , width=6),
+            dbc.Col(
+                dcc.Graph(id='daterange_per_fc_sales_bar_graph_2', figure={})
+                , width=6)
+        ], className="mb-4")
+],className="dbc")
 
 #-------------------------------------------------------------------
 #daterangepicker
@@ -122,20 +129,41 @@ def set_cities_value(available_options):
 
 
 @callback(
-    Output(component_id='daterange_per_fc_sales_bar_graph', component_property='figure'),
+    [Output(component_id='daterange_per_fc_sales_bar_graph', component_property='figure'),
+     Output(component_id='daterange_per_fc_sales_bar_graph_2', component_property='figure')],
     [Input(component_id='product_category_dpdn', component_property='value'),
-    Input(component_id='product_group_dpdn', component_property='value'),
-    Input(component_id='inventory_analysis_data', component_property='data')]
+     Input(component_id='product_group_dpdn', component_property='value'),
+     Input(component_id='inventory_analysis_data', component_property='data')]
 )
-def update_graph(selected_product_category,chosen_product_group, data):
+def update_grpah(selected_product_category,chosen_product_group, data):
     df = pd.DataFrame(data)
     if len(chosen_product_group) == 0:
         return dash.no_update
     else:
-        chosen_product_group_li = chosen_product_group.split(",")
+        chosen_product_group_li = chosen_product_group.split(",")\
+
         dff = df[(df.product_category.isin(selected_product_category)) & (df.product_group.isin(chosen_product_group_li))]
-        dff2 = dff.drop(['date_day','product_group','product_category'], axis=1)
-        dff3 = dff2.groupby(['product', 'distribution_point_city'])['units_sold'].mean().round(0).reset_index()
-        fig = px.bar(dff3, x="distribution_point_city", y="units_sold", color="product", title="Long-Form Input",
-                      custom_data=['product', 'units_sold'])
-        return fig
+
+        dff2 = dff.groupby(['product_category', 'distribution_point_city'])['units_sold'].sum().reset_index()
+        dff2 = dff2.pivot(index=["product_category"], columns=["distribution_point_city"], values="units_sold")
+        fig = px.imshow(dff2, color_continuous_scale=px.colors.sequential.Plasma,
+                        title="Units sold per distribution center",height=650)
+        fig.update_layout(title_font={'size': 27}, title_x=0.5)
+        fig.update_traces(hoverongaps=False,
+                          hovertemplate="product: %{y}"
+                                        "<br>distribution_point_city: %{x}"
+                                        "<br>units_sold: %{z}<extra></extra>"
+                          )
+
+        dfb2 = dff.groupby(['product_category', 'distribution_point_city'])['units_shrinkage'].sum().reset_index()
+        dfb2 = dfb2.pivot(index=["product_category"], columns=["distribution_point_city"], values="units_shrinkage")
+        fig2 = px.imshow(dfb2, color_continuous_scale=px.colors.sequential.Plasma,
+                        title="Units shrinkage per distribution center", height=650, template="SUPERHERO")
+        fig2.update_layout(title_font={'size': 27}, title_x=0.5)
+        fig2.update_traces(hoverongaps=False,
+                          hovertemplate="product: %{y}"
+                                        "<br>distribution_point_city: %{x}"
+                                        "<br>units_shrinkage: %{z}<extra></extra>"
+                          )
+
+        return fig, fig2
