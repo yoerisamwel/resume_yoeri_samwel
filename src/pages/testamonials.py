@@ -12,7 +12,7 @@ def layout():
     dbc.Row([
         dbc.Col([
             dcc.Markdown('#### Joe Thompson'),
-            dcc.Markdown('Director of Supply Chain')
+            dcc.Markdown('Urbanstems Director of Supply Chain')
         ], width=2),
         dbc.Col([
             dcc.Markdown('Yoeri is the rare jack-of-all-trades that excels at everything he touches,'
@@ -29,28 +29,20 @@ def layout():
 
     dbc.Row([
         dbc.Col([
-            dcc.Markdown('#### Ousmane Dembélé'),
-            dcc.Markdown('FC Barcelona Attacking Midfielder')
+            dcc.Markdown('#### Steven Weinstein'),
+            dcc.Markdown('Urbanstems Lead analyst engineer')
         ], width=2),
         dbc.Col([
-            dcc.Markdown('Yoeri is so good with the ball. Every time he has the ball, I can see the stadium rise to its feet.'
-                         ' And he always shares goal opportunities with his teammates. The opposite of selfish. I know it is not '
-                         'appropriate for a player to say this, but I wish Yoeri was our coach instead of Xavier.',
+            dcc.Markdown('Yoeri is a combination of a strong business acumen, a sense of curiosity, and an ability to '
+                         'learn quickly.'
+                         ' At Urbanstems, Yoeri was able to identify areas where his technical skills could add large '
+                         'amounts of value and then collaborated with business users to quickly build in-depth, '
+                         'reusable analysis. '
+                         'Not satisfied with that, he continued to pull on strings, looking for previously unknown '
+                         'drivers of crucial KPIs which led to new questions, new analysis, and, ultimately, better '
+                         'decisions. I would be lucky to work with him again.',
                          className='ms-3'),
         ], width=5)
     ], justify='center'),
-    html.Hr(),
-
-    dbc.Row([
-        dbc.Col([
-            dcc.Markdown('#### Eric Garcia'),
-            dcc.Markdown('FC Barcelona Defender')
-        ], width=2),
-        dbc.Col([
-            dcc.Markdown('I feel so lucky to have a teammate like Yoeri on my team. People talk about Messi all the time '
-                         'but the talent Yoeri has for making goals is unmatched. Plus, Yoeri has never evaded taxes, so you '
-                         'would be lucky to have him on your team.',
-                         className='ms-3'),
-        ], width=5)
-    ], justify='center')
+    html.Hr()
 ])
