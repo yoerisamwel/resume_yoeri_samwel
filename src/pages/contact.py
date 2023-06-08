@@ -20,5 +20,7 @@ def layout():
     dcc.Markdown('yoerisamwel@gmail.com'),
     dcc.Markdown('Linkedin', className='mb-2'),
     dcc.Markdown('https://www.linkedin.com/in/yoeri-samwel-07301826/', link_target='_blank'),
+    dcc.Markdown('Github', className='mb-2'),
+    dcc.Markdown('github.com/yoerisamwel', link_target='_blank'),
         ], width={'size':6, 'offset':2})
 ], justify='center')
