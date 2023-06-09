@@ -4,11 +4,30 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
 from .side_bar import sidebar
+from datetime import datetime as dt
+from dash_bootstrap_templates import load_figure_template
+from urllib.request import urlopen
+import json
+with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
+    counties = json.load(response)
 
 dash.register_page(__name__, title='Projects', order=1)
 
-df = pd.read_csv('assets/Berlin_crimes.csv')
+load_figure_template(["SUPERHERO"])
 
+#-----------------------------------------------------------------------------------------------------------------------
+#importing data/csv's
+df_sales = pd.read_csv('assets/sales2.csv')
+df_geo = pd.read_csv('assets/geo_data.csv')
+df_sales['purchase_time_index'] = df_sales['purchase_time']
+df_sales['purchase_time_index'] = pd.to_datetime(df_sales['purchase_time_index'])
+df_sales['purchase_time'] = pd.to_datetime(df_sales['purchase_time'])
+df_sales2 = df_sales.copy()
+df_sales_geo = df_sales2.merge(df_geo, on='zipcode', how='left')
+df_sales2.set_index('purchase_time_index', inplace=True)
+df_sales_geo.set_index('purchase_time_index', inplace=True)
+df_sales_geo2=df_sales_geo.dropna(subset=['state'])
+#df_sales_geo.to_csv('check.csv')
 def layout():
     return html.Div([
     dbc.Row(
@@ -18,33 +37,97 @@ def layout():
                     sidebar()
                 ], xs=4, sm=4, md=2, lg=2, xl=2, xxl=2),
 
-            dbc.Col(
-                [
-                    html.H3('Graffiti Incidents in Berlin', style={'textAlign':'center'}),
-                    dcc.Dropdown(id='district_chosen',
-                                 options=df['District'].unique(),
-                                 value=["Lichtenberg", "Pankow", "Spandau"],
-                                 multi=True,
-                                 style={'color':'black'}
-                                 ),
-                    html.Hr(),
-                    dcc.Graph(id='line_chart', figure={}),
+            dbc.Col([
+                dbc.Card([
+                    dbc.CardHeader("Date range", style={'fontSize': 20, 'textAlign': 'center'}),
+                    dbc.CardBody([
+                        dcc.DatePickerRange(
+                            id='sales_date_range',
+                            calendar_orientation='horizontal',
+                            day_size=39,
+                            end_date_placeholder_text="Return",
+                            with_portal=False,
+                            first_day_of_week=0,
+                            reopen_calendar_on_clear=True,
+                            is_RTL=False,
+                            clearable=True,
+                            number_of_months_shown=1,
+                            start_date=dt(2022, 8, 1).date(),
+                            end_date=dt(2022, 10, 30).date(),
+                            display_format='MMM Do, YY',
+                            month_format='MMMM, YYYY',
+                            minimum_nights=1,
+                            persistence=True,
+                            persisted_props=['start_date'],
+                            persistence_type='session',
+                            updatemode='singledate'
+                        ),
+                    dcc.Store(id='sales_analysis_data', data=[], storage_type='memory')]
+                    )
+                ], style={"height": 150})
+            ],md=3,),
+            dbc.Col([
+                dbc.Card([
+                    dbc.CardHeader("Map selector:", style={'fontSize': 20, 'textAlign': 'center'}),
+                    dbc.CardBody(
+                        dcc.Dropdown(
+                            id='map_selector_dpdn',
+                            options=[{'label': s, 'value': s} for s in sorted(df_sales_geo2.state_abbr.unique())],
+                            value='Ohio',
+                            clearable=False
+                        )
+                    )
+                ], style={"height": 150})
+            ], md=3)
+            ]),
+    dbc.Row([
+        dbc.Col([
+            dbc.CardBody(
+                id='sales_bar_1')
+                ], width=6),
+        dbc.Col([
+            dbc.CardBody(
+                id='sales_chloromap_1')
+                ], width=6)
+    ])
+    ])
 
-                ], xs=8, sm=8, md=10, lg=10, xl=10, xxl=10)
-        ]
-    )
-])
+#-------------------------------------------------------------------
+#daterangepicker
+
 
 @callback(
-    Output("line_chart", "figure"),
-    Input("district_chosen", "value")
+    Output(component_id='sales_analysis_data', component_property='data'),
+    [Input(component_id='sales_date_range', component_property='start_date'),
+     Input(component_id='sales_date_range', component_property='end_date')]
 )
-def update_graph_card(districts):
-    if len(districts) == 0:
-        return dash.no_update
-    else:
-        df_filtered = df[df["District"].isin(districts)]
-        df_filtered = df_filtered.groupby(["Year", "District"])[['Graffiti']].median().reset_index()
-        fig = px.line(df_filtered, x="Year", y="Graffiti", color="District",
-                      labels={"Graffiti": "Graffiti incidents (avg)"}).update_traces(mode='lines+markers')
-        return fig
+def store_sales_data(start_date, end_date):
+    dff = df_sales2.sort_index().loc[start_date:end_date]
+    return dff.to_dict('records')
+
+
+@callback(
+    Output(component_id='sales_bar_1', component_property='children'),
+    Input(component_id='sales_analysis_data', component_property='data')
+     )
+def build_bar_graph_1(data):
+    df = pd.DataFrame(data)
+    dff = df.groupby(['product']).sum().reset_index()
+    fig = px.bar(dff, x="product", y="revenue", color="product",title = "Sales per product")
+    return dcc.Graph(id='Bar1_v1', figure=fig)
+
+@callback(
+    Output(component_id='sales_chloromap_1', component_property='children'),
+    Input(component_id='sales_analysis_data', component_property='data')
+     )
+def build_bar_graph_1(data):
+    df = pd.DataFrame(data)
+    dff = df.groupby(['zipcode'])['adjusted_quantity'].sum().reset_index()
+    fig = px.choropleth(dff, geojson=counties, locations='zipcode', color='adjusted_quantity',
+                        color_continuous_scale="Viridis",
+                        range_color=(0, 12),
+                        scope="usa",
+                        labels={'adjusted_quantity': 'units sold'}
+                        )
+    fig.update_layout(margin={"r": 0, "t": 100, "l": 0, "b": 0},title = "Counties generating sales")
+    return [dcc.Graph(id='chloro_1_v1', figure=fig)]

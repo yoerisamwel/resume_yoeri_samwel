@@ -12,15 +12,14 @@ layout = html.Div([
     dcc.Markdown('### Professional Summary', style={'textAlign': 'center'}),
     html.Hr(),
     dcc.Markdown('I am a dynamic, outgoing person with strong communication skills. \n'
-                 'Experience with python and especially the Dash plotly visualization library \n'
+                 'I have experience with python and especially the Dash plotly visualization library \n'
                  'I actively seek opportunities where my analytical skills and creativity can ' 
                  'contribute and help drive change/innovation.\n'
                  'My ability to adapt and learn in a fast paced changing environment makes'
                  'me an asset for organizations.\n'
                  'I firmly believe in continuous learning. I actively seek out opportunities to learn '
                  'new skills that improve me as a professional and as a person.\n'
-                 'I thrive working independently as well as being part of a team (or as group leader)' 
-                 'and my passion is to motivate people towards achieving shared goals.\n',
+                 'I thrive working in a group and am excided to lead a team to reach shared goals.\n',
                  style={'textAlign': 'center', 'white-space': 'pre'}),
     dcc.Markdown('### Skills', style={'textAlign': 'center'}),
     html.Hr(),
@@ -63,7 +62,7 @@ layout = html.Div([
                 html.Li('Automated multiple supply chain analyses and reports using python and SQL with '
                         'Mode Analytics UI. Enabled team members to run analyses daily instead of weekly through '
                         'significantly reducing time and labor required to create reports. Facilitated faster '
-                        'identification of issues and enabled  team to address issues as they developed. '),
+                        'identification of issues and enabled the team to address issues as they developed.'),
                 html.Li('Developed extensive python dashboard to analyze non-optimal shipments. Created time series '
                         'analysis to facilitate daily analysis into inventory availability and developed logic to '
                         'identify non-optimal shipment orders due to inventory availability. Created function that '
@@ -74,7 +73,7 @@ layout = html.Div([
                         'shipping. Team members gained insight into quality issue trends and took appropriate '
                         'corrective action due to utilizing dashboard.')
             ])
-        ], width=5)
+        ], width=7)
     ], justify='center'),
 
     dbc.Row([
@@ -109,7 +108,7 @@ layout = html.Div([
                     'responsibilities, monitoring team goals and problem solving with associates when necessary '
                     'to maintain progress.')
             ])
-        ], width=5)
+        ], width=7)
     ], justify='center'),
 
     dbc.Row([
@@ -139,7 +138,7 @@ layout = html.Div([
                     'Led dried bouquet product development. Implemented, designed and managed overall '
                     'production process.')
             ])
-        ], width=5)
+        ], width=7)
     ], justify='center'),
 
     dbc.Row([
@@ -156,7 +155,7 @@ layout = html.Div([
                 html.Li(
                     'Responsible for sales in North America and implementation of Letsgrow with new customers.')
             ])
-        ], width=5)
+        ], width=7)
     ], justify='center'),
 
     dbc.Row([
@@ -187,7 +186,7 @@ layout = html.Div([
                     'integrated chemical crop protection, biological crop protection, watering strategy and '
                     'fertilizer schedule.')
             ])
-        ], width=5)
+        ], width=7)
     ], justify='center'),
 
     dbc.Row([
@@ -207,7 +206,7 @@ layout = html.Div([
                     'watering strategy and fertilizer schedule. Managed the production and shipping of orders '
                     'with team of 6 employees. ')
             ])
-        ], width=5)
+        ], width=7)
     ], justify='center'),
 
     dbc.Row([
@@ -226,7 +225,7 @@ layout = html.Div([
                 html.Li(
                     'Developed assortment of varieties that could be profitably sold in the United States.')
             ])
-        ], width=5)
+        ], width=7)
     ], justify='center'),
 
     dbc.Row([
@@ -245,7 +244,7 @@ layout = html.Div([
                     'in China. Product assortment offered, produced and sold by Van den Berg Roses grew '
                     'from 2 to 8 products.')
             ])
-        ], width=5)
+        ], width=7)
     ], justify='center'),
 
     dbc.Row([
@@ -270,7 +269,7 @@ layout = html.Div([
                     'Helped develop three brands to help floral wholesalers distinguish themselves from '
                     'competition in the local market, increasing the sales by 50%. ')
             ])
-        ], width=5)
+        ], width=7)
     ], justify='center'),
 
     dcc.Markdown('### Education', style={'textAlign': 'center'}),
@@ -286,7 +285,7 @@ layout = html.Div([
                          'Hogeschool Inholland - Delft, The Netherlands',
                          style={'white-space': 'pre'},
                          className='ms-3'),
-        ], width=5)
+        ], width=7)
     ], justify='center'),
     dbc.Row([
         dbc.Col([

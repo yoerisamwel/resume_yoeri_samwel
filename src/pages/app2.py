@@ -28,7 +28,6 @@ df_categories.product_category.fillna(df_categories.vase_group, inplace=True)
 df_categories_2 = df_categories.drop(['color_group','candy_group','vase_group'], axis=1)
 df_stock2 = df_stock.merge(df_categories_2, on='product', how='left')
 df_stock2.set_index('date_index', inplace=True)
-#df_stock2.to_csv('check.csv')
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -91,10 +90,13 @@ def layout():
         ], className="mb-4"),
         dbc.Row([
             dbc.Col(
-                dcc.Graph(id='daterange_per_fc_sales_bar_graph', figure={})
+                dcc.Graph(id='daterange_per_fc_sales_chloro_graph', figure={},
+                          config={'staticPlot': False, 'scrollZoom': True, 'doubleClick': 'reset',
+                                  'showTips': False, 'displayModeBar': True, 'watermark': True}
+                          )
                 , width=6),
             dbc.Col(
-                dcc.Graph(id='daterange_per_fc_sales_bar_graph_2', figure={})
+                dcc.Graph(id='connected_bar_graph', figure={})
                 , width=6)
         ], className="mb-4")
 ],className="dbc")
@@ -107,7 +109,7 @@ def layout():
      Input(component_id='date_picker_range', component_property='end_date')]
 )
 def store_data(start_date, end_date):
-    dff = df_stock2.loc[start_date:end_date]
+    dff = df_stock2.sort_index().loc[start_date:end_date]
     return dff.to_dict('records')
 
 @callback(
@@ -129,8 +131,7 @@ def set_cities_value(available_options):
 
 
 @callback(
-    [Output(component_id='daterange_per_fc_sales_bar_graph', component_property='figure'),
-     Output(component_id='daterange_per_fc_sales_bar_graph_2', component_property='figure')],
+    [Output(component_id='daterange_per_fc_sales_chloro_graph', component_property='figure')],
     [Input(component_id='product_category_dpdn', component_property='value'),
      Input(component_id='product_group_dpdn', component_property='value'),
      Input(component_id='inventory_analysis_data', component_property='data')]
@@ -140,13 +141,13 @@ def update_grpah(selected_product_category,chosen_product_group, data):
     if len(chosen_product_group) == 0:
         return dash.no_update
     else:
-        chosen_product_group_li = chosen_product_group.split(",")\
+        chosen_product_group_li = chosen_product_group.split(",")
 
         dff = df[(df.product_category.isin(selected_product_category)) & (df.product_group.isin(chosen_product_group_li))]
 
         dff2 = dff.groupby(['product_category', 'distribution_point_city'])['units_sold'].sum().reset_index()
-        dff2 = dff2.pivot(index=["product_category"], columns=["distribution_point_city"], values="units_sold")
-        fig = px.imshow(dff2, color_continuous_scale=px.colors.sequential.Plasma,
+        dff3 = dff2.pivot_table(index=["product_category"], columns=["distribution_point_city"], values="units_sold")
+        fig = px.imshow(dff3, color_continuous_scale=px.colors.sequential.Plasma,
                         title="Units sold per distribution center",height=650)
         fig.update_layout(title_font={'size': 27}, title_x=0.5)
         fig.update_traces(hoverongaps=False,
@@ -155,15 +156,33 @@ def update_grpah(selected_product_category,chosen_product_group, data):
                                         "<br>units_sold: %{z}<extra></extra>"
                           )
 
-        dfb2 = dff.groupby(['product_category', 'distribution_point_city'])['units_shrinkage'].sum().reset_index()
-        dfb2 = dfb2.pivot(index=["product_category"], columns=["distribution_point_city"], values="units_shrinkage")
-        fig2 = px.imshow(dfb2, color_continuous_scale=px.colors.sequential.Plasma,
-                        title="Units shrinkage per distribution center", height=650, template="SUPERHERO")
-        fig2.update_layout(title_font={'size': 27}, title_x=0.5)
-        fig2.update_traces(hoverongaps=False,
-                          hovertemplate="product: %{y}"
-                                        "<br>distribution_point_city: %{x}"
-                                        "<br>units_shrinkage: %{z}<extra></extra>"
-                          )
+        return [fig]
 
-        return fig, fig2
+@callback(
+     Output(component_id='connected_bar_graph', component_property='figure'),
+    [Input(component_id='inventory_analysis_data', component_property='data'),
+     Input(component_id='daterange_per_fc_sales_bar_graph', component_property='hoverData'),
+     Input(component_id='daterange_per_fc_sales_bar_graph', component_property='clickData'),
+     Input(component_id='daterange_per_fc_sales_bar_graph', component_property='selectedData'),
+     Input(component_id='product_category_dpdn', component_property='value'),
+     Input(component_id='product_group_dpdn', component_property='value')]
+)
+def update_connected_graph(data, hov_data, clk_data, slct_data, selected_product_category, chosen_product_group):
+    df = pd.DataFrame(data)
+    if hov_data is None:
+        chosen_product_group_li = chosen_product_group.split(",")
+        dff2 = df[(df.product_category.isin(selected_product_category)) & (df.product_group.isin(chosen_product_group_li))]
+        dff3 = dff2.groupby(['product_category', 'distribution_point_city','date_day'])['units_sold'].sum().reset_index()
+        dff3 = dff3[dff3.product_category == 'white']
+        print(dff3)
+        fig2 = px.bar(dff3, x="date_day", y="units_sold", color="distribution_point_city", title="Long-Form Input")
+        return [fig2]
+    else:
+        chosen_product_group_li = chosen_product_group.split(",")
+        dff2 = df[(df.product_category.isin(selected_product_category)) & (df.product_group.isin(chosen_product_group_li))]
+        hov_product_category = hov_data['points'][0]['x']
+        dff2 = dff2[dff2.product_category == hov_product_category]
+        print(dff2)
+        fig2 = px.bar(dff2, x="date_day", y="units_sold", color="distribution_point_city",
+                      title=f'Population for: {hov_product_category}')
+        return [fig2]
