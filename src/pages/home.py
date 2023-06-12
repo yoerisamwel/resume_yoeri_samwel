@@ -294,7 +294,7 @@ layout = html.Div([
                          className='ms-3'),
             html.Ul([
                 html.Li(
-                    'Initiated research out of curriculim reseach on Dutch companies entering the Chinese market.'
+                    'Initiated research out of curriculum research on Dutch companies entering the Chinese market.'
                     'Found three companies willing to fund the research and facilitate field visits to the 12 companies '
                     'throughout China.'
                     'Summarized all experiences and presented these findings in a symposium attended by 180 people.'),
