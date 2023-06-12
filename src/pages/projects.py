@@ -17,8 +17,8 @@ load_figure_template(["SUPERHERO"])
 
 #-----------------------------------------------------------------------------------------------------------------------
 #importing data/csv's
-df_sales = pd.read_csv('assets/sales2.csv')
-df_geo = pd.read_csv('assets/geo_data.csv')
+df_sales = pd.read_csv('https://raw.githubusercontent.com/yoerisamwel/raw_data/master/sales2.csv')
+df_geo = pd.read_csv('https://raw.githubusercontent.com/yoerisamwel/raw_data/master/geo_data.csv')
 df_sales['purchase_time_index'] = df_sales['purchase_time']
 df_sales['purchase_time_index'] = pd.to_datetime(df_sales['purchase_time_index'])
 df_sales['purchase_time'] = pd.to_datetime(df_sales['purchase_time'])
@@ -65,29 +65,12 @@ def layout():
                     dcc.Store(id='sales_analysis_data', data=[], storage_type='memory')]
                     )
                 ], style={"height": 150})
-            ],md=3,),
-            dbc.Col([
-                dbc.Card([
-                    dbc.CardHeader("Map selector:", style={'fontSize': 20, 'textAlign': 'center'}),
-                    dbc.CardBody(
-                        dcc.Dropdown(
-                            id='map_selector_dpdn',
-                            options=[{'label': s, 'value': s} for s in sorted(df_sales_geo2.state_abbr.unique())],
-                            value='Ohio',
-                            clearable=False
-                        )
-                    )
-                ], style={"height": 150})
-            ], md=3)
+            ],md=3,)
             ]),
     dbc.Row([
         dbc.Col([
             dbc.CardBody(
                 id='sales_bar_1')
-                ], width=6),
-        dbc.Col([
-            dbc.CardBody(
-                id='sales_chloromap_1')
                 ], width=6)
     ])
     ])
@@ -115,7 +98,7 @@ def build_bar_graph_1(data):
     dff = df.groupby(['product']).sum().reset_index()
     fig = px.bar(dff, x="product", y="revenue", color="product",title = "Sales per product")
     return dcc.Graph(id='Bar1_v1', figure=fig)
-
+'''
 @callback(
     Output(component_id='sales_chloromap_1', component_property='children'),
     Input(component_id='sales_analysis_data', component_property='data')
@@ -131,3 +114,4 @@ def build_bar_graph_1(data):
                         )
     fig.update_layout(margin={"r": 0, "t": 100, "l": 0, "b": 0},title = "Counties generating sales")
     return [dcc.Graph(id='chloro_1_v1', figure=fig)]
+'''

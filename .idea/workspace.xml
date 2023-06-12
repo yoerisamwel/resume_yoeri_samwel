@@ -6,12 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3ffb04aa-cbba-418f-8afd-943efa5bbe7f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/app2.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/app2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/app3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/contact.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/contact.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/projects.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/projects.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/side_bar.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/side_bar.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,13 +24,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/yoeri/Desktop/Coding/work_in_progress"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/yoeri/Desktop/Coding/work_in_progress&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.app">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Resume_website" />
