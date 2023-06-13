@@ -28,10 +28,14 @@ df_sales2.set_index('purchase_time_index', inplace=True)
 df_sales_geo.set_index('purchase_time_index', inplace=True)
 df_sales_geo2=df_sales_geo.dropna(subset=['state'])
 #df_sales_geo.to_csv('check.csv')
+
+#-----------------------------------------------------------------------------------------------------------------------
+#layout
+
+
 def layout():
     return html.Div([
-    dbc.Row(
-        [
+    dbc.Row([
             dbc.Col(
                 [
                     sidebar()
@@ -61,43 +65,35 @@ def layout():
                             persisted_props=['start_date'],
                             persistence_type='session',
                             updatemode='singledate'
-                        ),
-                    dcc.Store(id='sales_analysis_data', data=[], storage_type='memory')]
                     )
                 ], style={"height": 150})
-            ],md=3,)
+                    ])
+                ])
             ]),
     dbc.Row([
         dbc.Col([
             dbc.CardBody(
                 id='sales_bar_1')
                 ], width=6)
+        ])
     ])
-    ])
-
 #-------------------------------------------------------------------
-#daterangepicker
-
-
-@callback(
-    Output(component_id='sales_analysis_data', component_property='data'),
-    [Input(component_id='sales_date_range', component_property='start_date'),
-     Input(component_id='sales_date_range', component_property='end_date')]
-)
-def store_sales_data(start_date, end_date):
-    dff = df_sales2.sort_index().loc[start_date:end_date]
-    return dff.to_dict('records')
+#callbacks
 
 
 @callback(
     Output(component_id='sales_bar_1', component_property='children'),
-    Input(component_id='sales_analysis_data', component_property='data')
-     )
-def build_bar_graph_1(data):
-    df = pd.DataFrame(data)
+    Input(component_id='sales_date_range', component_property='start_date'),
+    Input(component_id='sales_date_range', component_property='end_date')
+    )
+def build_bar_graph_1(start_date,end_date):
+    df = df_sales2.sort_index().loc[start_date:end_date]
+    df = df.drop(['purchase_time'], axis=1)
     dff = df.groupby(['product']).sum().reset_index()
-    fig = px.bar(dff, x="product", y="revenue", color="product",title = "Sales per product")
+    dff2 = dff.copy()
+    fig = px.bar(dff2, x="product", y="revenue", color="product",title = "Sales per product")
     return dcc.Graph(id='Bar1_v1', figure=fig)
+
 '''
 @callback(
     Output(component_id='sales_chloromap_1', component_property='children'),
