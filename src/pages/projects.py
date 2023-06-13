@@ -66,9 +66,9 @@ def layout():
                             persistence_type='session',
                             updatemode='singledate'
                     )
-                ], style={"height": 150})
+                ], style={"height": 125})
                     ])
-                ])
+                ],width=3)
             ]),
     dbc.Row([
         dbc.Col([

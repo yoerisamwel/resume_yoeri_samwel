@@ -11,6 +11,11 @@ dash.register_page(__name__, title="Today's weather API")
 
 load_figure_template(["SUPERHERO"])
 
+#-----------------------------------------------------------------------------------------------------------------------
+#weather API documentation
+#https://weatherstack.com/documentation
+
+#categories to pull from weather api for use in the app
 categories=["observation_time","temperature","wind_speed","precip","humidity",
             "cloudcover","feelslike","uv_index","visibility"]
 
