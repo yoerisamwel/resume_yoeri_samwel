@@ -145,3 +145,5 @@ def update_grpah(selected_product_category,chosen_product_group, start_date, end
                           )
 
         return [fig]
+
+
