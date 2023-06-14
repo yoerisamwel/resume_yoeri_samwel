@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f15a55a6-9ee4-4529-ab56-145794d758ef" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/old_sales.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/app_inventory_dash.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/css_stylesheet_plotly.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/css_stylesheet_plotly.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/projects.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/projects.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

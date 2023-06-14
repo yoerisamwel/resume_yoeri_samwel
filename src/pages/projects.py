@@ -80,8 +80,14 @@ def layout():
             dbc.CardBody(
                 id='sales_chloromap_1')
         ], width=6)
-        ])
+        ]),
+    dbc.Row([
+        dbc.Col([
+            dbc.CardBody(
+                id='sales_bar_2')
+        ], width=6)
     ])
+])
 #-------------------------------------------------------------------
 #callbacks
 
@@ -94,9 +100,10 @@ def layout():
 def build_bar_graph_1(start_date,end_date):
     df = df_sales2.sort_index().loc[start_date:end_date]
     df = df.drop(['purchase_time'], axis=1)
-    dff = df.groupby(['product']).sum().reset_index()
+    df = df.rename(columns={'product': 'Product','revenue': 'Revenue'})
+    dff = df.groupby(['Product']).sum().reset_index()
     dff2 = dff.copy()
-    fig = px.bar(dff2, x="product", y="revenue", color="product",title = "Sales per product")
+    fig = px.bar(dff2, x="Product", y="Revenue", color="Product",title = "Total sales per product for date range")
     return dcc.Graph(id='Bar1_v1', figure=fig)
 
 
@@ -116,3 +123,16 @@ def build_bar_graph_1(start_date,end_date):
                         )
     fig.update_layout(margin={"r": 0, "t": 100, "l": 0, "b": 0},title = "Counties generating sales")
     return [dcc.Graph(id='chloro_1_v1', figure=fig)]
+
+@callback(
+    Output(component_id='sales_bar_2', component_property='children'),
+    Input(component_id='sales_date_range', component_property='start_date'),
+    Input(component_id='sales_date_range', component_property='end_date')
+    )
+def build_bar_graph_1(start_date,end_date):
+    df = df_sales2.sort_index().loc[start_date:end_date]
+    df = df.rename(columns={'purchase_time': 'Purchase date'})
+    dff = df.groupby(['product','Purchase date']).sum().reset_index()
+    dff2 = dff.copy()
+    fig = px.bar(dff2, x="Purchase date", y="revenue", color="product",title = "Sales per day")
+    return dcc.Graph(id='Bar2_v1', figure=fig)
