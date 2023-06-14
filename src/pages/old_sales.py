@@ -1,19 +1,10 @@
-import dash
-from dash import html, dcc, Input, Output, State, callback
-import dash_bootstrap_components as dbc
-import plotly.express as px
-import pandas as pd
-from .side_bar import sidebar
-from datetime import datetime as dt
-from dash_bootstrap_templates import load_figure_template
+
 from urllib.request import urlopen
 import json
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties = json.load(response)
 
-dash.register_page(__name__, title='Projects', order=1)
 
-load_figure_template(["SUPERHERO"])
 
 #-----------------------------------------------------------------------------------------------------------------------
 #importing data/csv's
