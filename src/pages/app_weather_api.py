@@ -16,8 +16,9 @@ load_figure_template(["SUPERHERO"])
 #https://weatherstack.com/documentation
 
 #categories to pull from weather api for use in the app
-categories=["observation_time","temperature","wind_speed","precip","humidity",
-            "cloudcover","feelslike","uv_index","visibility"]
+categories=["Last weather data pull","Temperature in Celsius","Wind speed in meter per second",
+            "Expected rain amount in centiliters","Relative humidity","Cloud cover",
+            "The feels like temperature","uv index"]
 
 def update_weather():
     weather_requests = requests.get(
@@ -25,6 +26,12 @@ def update_weather():
     )
     json_data = weather_requests.json()
     df = pd.DataFrame(json_data)
+    print(df)
+    df2 = df.rename({"observation_time": "Last weather data pull", "wind_speed": "Wind speed in meter per second",
+                     "temperature": "Temperature in Celsius","precip": "Expected rain amount in centiliters",
+                     "humidity": "Relative humidity", "cloudcover": "Cloud cover",
+                     "feelslike": "The feels like temperature","uv_index": "uv index"})
+    print(df2)
     return([
             html.Table(
                 className='table-weather',
@@ -38,7 +45,7 @@ def update_weather():
                             )
                         ]
                     )
-            for name,data in zip(categories,df['current'][categories])
+            for name,data in zip(categories,df2['current'][categories])
         ])
     ])
 
@@ -66,7 +73,7 @@ def layout():
                                      )
                             ])
                         ])
-                    ], width=3)
+                    ], width=4)
                 ])
 
 
