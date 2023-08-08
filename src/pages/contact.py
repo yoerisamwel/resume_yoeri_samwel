@@ -13,7 +13,7 @@ def layout():
     html.Hr(),
     dcc.Markdown('### Personal info', className='mb-2'),
     dcc.Markdown('Address:', className='mb-2'),
-    dcc.Markdown('510 n Connecticut ave Royal Oak MI'),
+    dcc.Markdown('Royal Oak MI'),
     dcc.Markdown('Phone Number:', className='mb-2'),
     dcc.Markdown('540-729-4921'),
     dcc.Markdown('Email:', className='mb-2'),

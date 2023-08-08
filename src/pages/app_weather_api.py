@@ -26,12 +26,10 @@ def update_weather():
     )
     json_data = weather_requests.json()
     df = pd.DataFrame(json_data)
-    print(df)
     df2 = df.rename({"observation_time": "Last weather data pull", "wind_speed": "Wind speed in meter per second",
                      "temperature": "Temperature in Celsius","precip": "Expected rain amount in centiliters",
                      "humidity": "Relative humidity", "cloudcover": "Cloud cover",
                      "feelslike": "The feels like temperature","uv_index": "uv index"})
-    print(df2)
     return([
             html.Table(
                 className='table-weather',
