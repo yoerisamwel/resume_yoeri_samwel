@@ -15,7 +15,7 @@ layout = html.Div([
                  'I have experience with python and especially the Dash plotly visualization library \n'
                  'I actively seek opportunities where my analytical skills and creativity can ' 
                  'contribute and help drive change/innovation.\n'
-                 'My ability to adapt and learn in a fast paced changing environment makes'
+                 'My ability to adapt and learn in a fast paced changing environment makes '
                  'me an asset for organizations.\n'
                  'I firmly believe in continuous learning. I actively seek out opportunities to learn '
                  'new skills that improve me as a professional and as a person.\n'
