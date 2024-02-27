@@ -14,8 +14,6 @@ def layout():
     dcc.Markdown('### Personal info', className='mb-2'),
     dcc.Markdown('Address:', className='mb-2'),
     dcc.Markdown('Royal Oak MI'),
-    dcc.Markdown('Phone Number:', className='mb-2'),
-    dcc.Markdown('540-729-4921'),
     dcc.Markdown('Email:', className='mb-2'),
     dcc.Markdown('yoerisamwel@gmail.com'),
     dcc.Markdown('Linkedin:', className='mb-2'),
