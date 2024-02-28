@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36fefccb-4a75-4423-99bf-50a931956bed" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/css_stylesheet_plotly.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/css_stylesheet_plotly.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/michigan_python.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/michigan_python.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/old_sales.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/projects.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/projects.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/side_bar.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/side_bar.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

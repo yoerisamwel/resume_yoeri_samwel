@@ -2,7 +2,6 @@ import dash
 from dash import html, dcc, Input, Output, State, callback
 import dash_bootstrap_components as dbc
 import requests
-import markdown
 import re
 from .side_bar import sidebar
 from dash_bootstrap_templates import load_figure_template
