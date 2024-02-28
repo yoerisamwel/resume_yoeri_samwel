@@ -19,7 +19,7 @@ def sidebar():
             nav_links.append(
                 dbc.NavLink(
                     [
-                        html.Div("Sales dashboard", className="ms-2"),
+                        html.Div("GWU Project 3", className="ms-2"),
                     ],
                     href=page["path"],
                     active="exact",
