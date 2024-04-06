@@ -27,7 +27,7 @@ def layout():
                 dbc.Card(
                     style={"width": "100%", "margin-bottom": "20px"},
                     children=[
-                        dbc.CardHeader("This Presentation"),
+                        dbc.CardHeader("Dash Plotly presentation"),
                         dbc.CardBody([
                             dash_player.DashPlayer(
                                 id="player1",
@@ -36,8 +36,9 @@ def layout():
                                 width="100%",
                                 height="250px",
                             ),
-                            html.P("Here's an explanation of what this video is about, "
-                                   "and how it contributes to my presentation skills improvement.",
+                            html.P("I conducted a virtual presentation for Michigan Python,"
+                            "offering a beginner-friendly introduction to Dash by Plotly, showcasing "
+                            "its versatility as a presentation tool.",
                                    className="card-text")
                         ])
                     ]
@@ -49,7 +50,7 @@ def layout():
                 dbc.Card(
                     style={"width": "100%", "margin-bottom": "20px"},
                     children=[
-                        dbc.CardHeader("This Presentation"),
+                        dbc.CardHeader("Pandas introduction"),
                         dbc.CardBody([
                             dash_player.DashPlayer(
                                 id="player2",
@@ -58,8 +59,34 @@ def layout():
                                 width="100%",
                                 height="250px",
                             ),
-                            html.P("This video further demonstrates my efforts in honing "
-                                   "my presentation skills, featuring Python-related content.",
+                            html.P("I had the opportunity to share my knowledge with the Michigan "
+                                    "Python community through a virtual presentation, focusing on "
+                                    "the powerful pandas library, a cornerstone for data manipulation "
+                                   "and analysis in Python.",
+                                   className="card-text")
+                        ])
+                    ]
+                )
+            ], width=12, md=6),
+        ], justify='around'),
+        dbc.Row([
+            # Second video card
+            dbc.Col([
+                dbc.Card(
+                    style={"width": "100%", "margin-bottom": "20px"},
+                    children=[
+                        dbc.CardHeader("Geopandas introduction"),
+                        dbc.CardBody([
+                            dash_player.DashPlayer(
+                                id="player2",
+                                url="https://www.youtube.com/watch?v=CXWsC6t4M2s&t=1408s",
+                                controls=True,
+                                width="100%",
+                                height="250px",
+                            ),
+                            html.P("I had the opportunity to share my knowledge with the Michigan Python community "
+                                   "through a virtual presentation, focusing on the powerful GeoPandas library, "
+                                   "a cornerstone for geospatial data manipulation and analysis in Python.",
                                    className="card-text")
                         ])
                     ]
