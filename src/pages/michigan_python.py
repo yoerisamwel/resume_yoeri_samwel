@@ -5,9 +5,19 @@ import dash_player
 
 dash.register_page(__name__, order=4)
 
-# Style for the introductory text
-text_style = {'textAlign': 'center', 'margin': '20px'}
+# Define text style for headings and paragraphs
+text_style = {
+    'color': '#fff',
+    'fontFamily': 'Arial, sans-serif'
+}
 
+# Custom CSS for equal card height
+card_body_style = {
+    "display": "flex",
+    "flexDirection": "column",
+    "justifyContent": "space-between",
+    "height": "400px"
+}
 
 def layout():
     return dbc.Container([
@@ -36,11 +46,11 @@ def layout():
                                 width="100%",
                                 height="250px",
                             ),
-                            html.P("I conducted a virtual presentation for Michigan Python,"
-                            "offering a beginner-friendly introduction to Dash by Plotly, showcasing "
-                            "its versatility as a presentation tool.",
+                            html.P("I conducted a virtual presentation for Michigan Python, "
+                                   "offering a beginner-friendly introduction to Dash by Plotly, showcasing "
+                                   "its versatility as a presentation tool.",
                                    className="card-text")
-                        ])
+                        ], style=card_body_style)
                     ]
                 )
             ], width=12, md=6),
@@ -60,17 +70,17 @@ def layout():
                                 height="250px",
                             ),
                             html.P("I had the opportunity to share my knowledge with the Michigan "
-                                    "Python community through a virtual presentation, focusing on "
-                                    "the powerful pandas library, a cornerstone for data manipulation "
+                                   "Python community through a virtual presentation, focusing on "
+                                   "the powerful pandas library, a cornerstone for data manipulation "
                                    "and analysis in Python.",
                                    className="card-text")
-                        ])
+                        ], style=card_body_style)
                     ]
                 )
             ], width=12, md=6),
         ], justify='around'),
         dbc.Row([
-            # Second video card
+            # Third video card
             dbc.Col([
                 dbc.Card(
                     style={"width": "100%", "margin-bottom": "20px"},
@@ -78,7 +88,7 @@ def layout():
                         dbc.CardHeader("Geopandas introduction"),
                         dbc.CardBody([
                             dash_player.DashPlayer(
-                                id="player2",
+                                id="player3",
                                 url="https://www.youtube.com/watch?v=CXWsC6t4M2s&t=1408s",
                                 controls=True,
                                 width="100%",
@@ -88,9 +98,9 @@ def layout():
                                    "through a virtual presentation, focusing on the powerful GeoPandas library, "
                                    "a cornerstone for geospatial data manipulation and analysis in Python.",
                                    className="card-text")
-                        ])
+                        ], style=card_body_style)
                     ]
                 )
             ], width=12, md=6),
-        ], justify='around'),
+        ], justify='start'),
     ], fluid=True)
