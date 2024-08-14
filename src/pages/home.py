@@ -51,6 +51,53 @@ layout = html.Div([
 
     dbc.Row([
         dbc.Col([
+            dcc.Markdown('2023 Sep  to Current', style={'textAlign': 'center'})
+        ], width=2),
+        dbc.Col([
+            dcc.Markdown('Logistics Engineer & Data Analyst at DSV North America', style={'textAlign': 'center'})
+        ], width=2),
+        dbc.Col([
+            dcc.Markdown('Cost Saving and Network Optimization:\n'
+                         '- Conducted analyses to identify cost-saving opportunities in Ford\'s logistics network.\n'
+                         '- Identified areas for network optimization to enhance efficiency and reduce expenses.\n'
+                         '- Used data analysis techniques to uncover trends, inefficiencies, and areas for improvement.\n\n'
+                         'Program Targets:\n'
+                         '- Collaborated with Ford stakeholders to set clear targets for cost-saving and optimization.\n'
+                         '- Incorporated feedback on shipping timelines and cost priorities into target-setting.\n'
+                         '- Ensured targets aligned with Ford\'s logistics goals and objectives.\n\n'
+                         'Dashboard Development:\n'
+                         '- Created interactive dashboards with Power BI and Python\'s Dash to visualize key metrics.\n'
+                         '- Designed dashboards for real-time insights into program health and progress.\n'
+                         '- Regularly reviewed dashboards with stakeholders to monitor performance and identify improvements.\n\n'
+                         'Forecasting Trends:\n'
+                         '- Developed forecasting models using Scikit-learn and Facebook Prophet to predict volume and timeline trends.\n'
+                         '- Leveraged historical data for accurate forecasts to support decision-making.\n'
+                         '- Integrated trends into program targets and strategies to address future challenges.\n\n'
+                         'Achievements:\n'
+                         '- Conducted a study using Python, Py3DBP, Pandas, Plotly, and Jupyter Notebooks to analyze packing volume and container stuffing, showing 20% optimization potential for the Ford FCSD program.\n'
+                         '- Developed a Power BI dashboard for in-depth transit time analysis, comparing actual transit times against contracted times with ocean carriers.\n'
+                         '- Added a Data Analyst role, enabling the creation of Power BI dashboards for customer presentations.\n'
+                         '- Automated several manual processes using Power Automate.\n\n'
+                         '**Skills:** Data Analysis · Data Modeling · Key Metrics · DAX · Problem Solving · Python · Microsoft Power Query · Power BI · Analytics · Data Models · Supply Chain Optimization · Query Writing · Data Quality · Data Manipulation',
+                         style={'white-space': 'pre'},
+                         className='ms-3')
+        ], width=7)
+    ], justify='center'),
+
+    dbc.Row([
+        dbc.Col([
+                dcc.Markdown('2023 June  to 2023 Aug', style={'textAlign': 'center'})
+            ], width=2),
+        dbc.Col([
+                dcc.Markdown(
+                    'In a period of professional reflection following a layoff, I made a decisive move towards a field that has always fascinated me: data analytics. With a firm resolve to pivot my career into data science, I enrolled in the GW Data Analytics Boot Camp. This program is not just an educational endeavor; it\'s a bridge to the thriving and transformative field of data science, offering a comprehensive curriculum that turns raw data into actionable insights. During this time, I also had the privilege of spending three amazing months with my daughter, who was 1.5 years old at the time, enjoying the Michigan summer.',
+                    style={'white-space': 'pre'},
+                    className='ms-3')
+                ], width=9)
+            ], justify='center'),
+
+    dbc.Row([
+        dbc.Col([
             dcc.Markdown('2022 Aug  to 2023 May', style={'textAlign': 'center'})
         ], width=2),
         dbc.Col([

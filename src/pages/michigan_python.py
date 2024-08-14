@@ -13,10 +13,10 @@ def layout():
     return dbc.Container([
         # Introductory text
         html.Div([
-            html.H2("Presentation Skills Enhancement", style=text_style),
+            html.H2("Michigan Python Presentations", style=text_style),
             html.P(
                 "I am creating these presentation videos to improve my presentation skills and "
-                "expand my network of Python enthusiasts.", style=text_style
+                "get to know more fellow Python enthusiasts.", style=text_style
             )
         ]),
 
