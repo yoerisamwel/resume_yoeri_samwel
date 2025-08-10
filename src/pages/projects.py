@@ -11,30 +11,56 @@ load_figure_template(["SUPERHERO"])
 
 # ----- Load long descriptions from /work_projects as Markdown -----
 # Here I added the logic to show a snapshot and then when the visitor click on the project it takes them to that page
-BASE_DIR = Path(__file__).resolve().parents[1]
-MD_DIR = BASE_DIR / "work_projects"
+APP_ROOT = Path(__file__).resolve().parents[1]  # app root (parent of /pages)
+CANDIDATES = [
+    APP_ROOT / "work_projects",          # e.g., /work_projects
+    APP_ROOT / "pages" / "work_projects" # e.g., /pages/work_projects
+]
+MD_DIR = next((p for p in CANDIDATES if p.exists()), CANDIDATES[0])
+print(f"[projects] Using Markdown dir: {MD_DIR}")
 
 def read_md(slug: str) -> str:
-    p = (MD_DIR / f"{slug}.md")
-    return p.read_text(encoding="utf-8") if p.exists() else "*Details coming soon.*"
+    fp = (MD_DIR / f"{slug}.md")
+    if not fp.exists():
+        print(f"[projects] Markdown not found: {fp}")
+        return "*Details coming soon.*"
+    return fp.read_text(encoding="utf-8")
 
 projects = [
     {
         "id": 1,
         "slug": "ford-transit-time",
-        "title": "Ford Transit Time Optimization",
-        "summary": "Proactive transit-time monitoring to reduce costly AIR shipments by detecting schedule disruptions early.",
+        "title": "Transit Time Optimization",
+        "summary": "Proactive transit-time monitoring allowing for early detection of carrier vessel schedule issues."
+                   "Enebeling the team to proactive adjust the inventory in transit planning and reduce Air Freight spend.",
         "details": read_md("ford-transit-time"),
     },
-    # add your other 5 with unique slugs matching .md filenames
     {
         "id": 2,
-        "slug": "project-2-slug",
-        "title": "Project 2 Title",
-        "summary": "Short one-liner about the project goal/value.",
-        "details": read_md("project-2-slug"),
+        "slug": "fcsd-demurrage",
+        "title": "Container Demurrage Analysis",
+        "summary": "Reduced costly demurrage fees by analyzing container pool dynamics and pinpointing the main operational drivers.",
+        "details": read_md("fcsd-demurrage"),
     },
 ]
+
+def make_card(p):
+    return dbc.Card([
+        dbc.CardHeader(p["title"]),
+        dbc.CardBody([
+            html.P(p["summary"], className="card-text"),
+            dbc.Collapse(
+                dbc.Card(
+                    dbc.CardBody(
+                        dcc.Markdown(p["details"], link_target="_blank")  # <-- render Markdown
+                    )
+                ),
+                id={"type": "collapse", "index": p["id"]},
+                is_open=False
+            ),
+            dbc.Button("View Details", href=f"/work_projects/{p['slug']}", color="primary", className="mt-2")
+        ])
+    ], className="mb-3 rounded-3")
 
 # Projects page layout
 
@@ -45,21 +71,7 @@ def layout():
         html.Hr(),
         *[
             dbc.Row(
-                dbc.Col(
-                    dbc.Card([
-                        dbc.CardHeader(p["title"]),
-                        dbc.CardBody([
-                            html.P(p["summary"], className="card-text"),
-                            dbc.Button("Read More", id={"type": "open-btn", "index": p["id"]}, color="link"),
-                            dbc.Collapse(
-                                dbc.Card(dbc.CardBody(html.P(p["details"]))),
-                                id={"type": "collapse", "index": p["id"]},
-                                is_open=False
-                            )
-                        ])
-                    ], className="mb-3"),
-                    width=12
-                ),
+                dbc.Col(make_card(p), width=12),
                 className="mb-2"
             )
             for p in projects
@@ -347,23 +359,8 @@ def layout():
                 #style={"width": "18rem"},  # Adjust size as needed
                 className="rounded-3"  # Rounded edges
             )
-        ], width=6),
-        dbc.Col([
-            dbc.Card(
-                [
-                    dbc.CardHeader("Titanic analysis"),
-                    dbc.CardBody(
-                        [
-                            html.P("A brief analysis of the Titanic dataset.", className="card-text"),
-                            dbc.Button("Go to GitHub", href="https://github.com/yoerisamwel/titanic-analysis",
-                                       color="primary", external_link=True, target="_blank")
-                        ]
-                    )
-                ],
-                #style={"width": "18rem"},  # Adjust size as needed
-                className="rounded-3"  # Rounded edges
-            )
-    ], width=6)])
+        ], width=6)
+    ])
     ])
 
 @callback(

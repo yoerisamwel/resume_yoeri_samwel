@@ -10,11 +10,12 @@ header = dbc.Navbar(
         [
             dbc.Row([
                 dbc.NavbarToggler(id="navbar-toggler"),
-                    dbc.Nav([
-                        dbc.NavLink(page["name"], href=page["path"])
-                        for page in dash.page_registry.values()
-                        if not page["path"].startswith("/app")
-                    ])
+                dbc.Nav([
+                    dbc.NavLink(page["name"], href=page["path"])
+                    for page in dash.page_registry.values()
+                    if not page["path"].startswith("/app")         # keep your existing filter
+                    and not page["path"].startswith("/work_projects/")  # <-- hides detail pages
+                ])
             ])
         ],
         fluid=True,
@@ -26,4 +27,5 @@ header = dbc.Navbar(
 app.layout = dbc.Container([header, dash.page_container], fluid=False)
 
 if __name__ == '__main__':
-	app.run_server(debug=False)
+    app.run_server(debug=False)
+app.layout = dbc.Container([header, dash.page_container], fluid=False)
