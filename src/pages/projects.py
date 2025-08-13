@@ -37,10 +37,11 @@ projects = [
     },
     {
         "id": 2,
-        "slug": "fcsd-demurrage",
-        "title": "Container Demurrage Analysis",
-        "summary": "Reduced costly demurrage fees by analyzing container pool dynamics and pinpointing the main operational drivers.",
-        "details": read_md("fcsd-demurrage"),
+        "slug": "dynamic_utlization",
+        "title": "Dynamic Container Utilization",
+        "summary": "Optimized container utilization from order to stuffing through end-to-end supply chain analysis, identifying 40% savings potential."
+                "Developed scenario-based tools enabling senior leadership to make data-driven cost and efficiency decisions.",
+        "details": read_md("dynamic_utlization"),
     },
 ]
 
@@ -347,11 +348,11 @@ def layout():
         dbc.Col([  # Column inside the row
             dbc.Card(
                 [
-                    dbc.CardHeader("Titanic analysis"),
+                    dbc.CardHeader("Dash Resume Website"),
                     dbc.CardBody(
                         [
-                            html.P("A brief analysis of the Titanic dataset.", className="card-text"),
-                            dbc.Button("Go to GitHub", href="https://github.com/yoerisamwel/titanic-analysis",
+                            html.P("My professional portfolio website highlighting data-driven supply chain optimization projects, blending logistics expertise with advanced analytics.", className="card-text"),
+                            dbc.Button("Go to GitHub", href="https://github.com/yoerisamwel/resume_yoeri_samwel/tree/master",
                                        color="primary", external_link=True, target="_blank")
                         ]
                     )

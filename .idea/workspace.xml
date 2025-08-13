@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="020d37f1-5ba6-4914-ba45-993b46de869a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/pages/work_projects/dynamic_utlization.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/Box_Volume_Buildup_52832_2024-07-01_to_2024-09-30.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/Box_Volume_Buildup_52832_2024-07-01_to_2024-09-30.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/projects.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/projects.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/work_projects/fcsd-demurrage.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
